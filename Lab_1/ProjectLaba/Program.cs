@@ -10,46 +10,52 @@ namespace ProjectLaba
     {
         static void Main(string[] args)
         {
-            float a, b, c;
+            double a, b, c;
             bool work = true;
             while (work)
             {
-                Console.Write("Enter A: ");                     //Вывод данных | std::cout << ... << std::endl;          
-                a = Convert.ToInt32(Console.ReadLine());        //Ввод данных  | std::cin >> ...;
+                Console.Clear();
 
-                Console.Write("Enter B: ");
-                b = Convert.ToInt32(Console.ReadLine());
+                do
+                    Console.Write("Enter A: ");
+                while (!double.TryParse(Console.ReadLine(), out a));
+                a = Convert.ToInt32(a);
 
+                do
+                    Console.Write("Enter B: ");
+                while (!double.TryParse(Console.ReadLine(), out b));
+                a = Convert.ToInt32(b);
+
+                do
                 Console.Write("Enter C: ");
-                c = Convert.ToInt32(Console.ReadLine());
-
+                while (!double.TryParse(Console.ReadLine(), out c)) ;
+                a = Convert.ToInt32(c);
 
                 double discriminant = (b * b) - 4 * a * c;
 
-                if (discriminant < 0) // 0 корней
+                if (discriminant < 0)
                 {
-                    Console.Write("This ");
+                    Console.Write("This equation has no solution");
                 }
-                else if (discriminant == 0) // 1 корень
+                else if (discriminant == 0)
                 {
-                    double x1 = (- b + Math.Round(Math.Sqrt(discriminant), 2)) / 2 * a;
+                    double x = (- b + Math.Round(Math.Sqrt(discriminant), 2)) / 2 * a;
+                    Console.Write("X = " + x);
                 }
-                else if (discriminant > 0) // 2 корня
+                else if (discriminant > 0)
                 {
                     double x1 = (-b + Math.Round(Math.Sqrt(discriminant), 2)) / 2 * a;
                     double x2 = (-b - Math.Round(Math.Sqrt(discriminant), 2)) / 2 * a;
-
-                    Console.Write("X1 = " + x1);
+                    Console.Write("X1 = " + x1 + " X2 = " + x2);
                 }
 
-                Console.Write("Exit? (1/0) \n");
+                Console.Write("\nExit? (1/0) \n");
                 a = Convert.ToInt32(Console.ReadLine());
                 if (a == 1)
                 {
                     work = false;
                 }
             }
-            Console.ReadKey();
         }
     }
 }
