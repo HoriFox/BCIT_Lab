@@ -1,0 +1,9 @@
+c:\users\helisrain\documents\visual studio 2015\Projects\ProjectLaba\ProjectLaba\bin\Debug\ProjectLaba.exe.config
+c:\users\helisrain\documents\visual studio 2015\Projects\ProjectLaba\ProjectLaba\bin\Debug\ProjectLaba.exe
+c:\users\helisrain\documents\visual studio 2015\Projects\ProjectLaba\ProjectLaba\bin\Debug\ProjectLaba.pdb
+c:\users\helisrain\documents\visual studio 2015\Projects\ProjectLaba\ProjectLaba\obj\Debug\ProjectLaba.csprojResolveAssemblyReference.cache
+c:\users\helisrain\documents\visual studio 2015\Projects\ProjectLaba\ProjectLaba\obj\Debug\ProjectLaba.exe
+c:\users\helisrain\documents\visual studio 2015\Projects\ProjectLaba\ProjectLaba\obj\Debug\ProjectLaba.pdb
+C:\Users\HeliSRaiN\Desktop\BCIT_Lab\Lab_1\ProjectLaba\bin\Debug\ProjectLaba.exe.config
+C:\Users\HeliSRaiN\Desktop\BCIT_Lab\Lab_1\ProjectLaba\obj\Debug\ProjectLaba.exe
+C:\Users\HeliSRaiN\Desktop\BCIT_Lab\Lab_1\ProjectLaba\obj\Debug\ProjectLaba.pdb
