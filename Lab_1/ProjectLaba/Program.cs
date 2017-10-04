@@ -10,7 +10,7 @@ namespace ProjectLaba
             do
                 Console.Write(prompt);
             while (!double.TryParse(Console.ReadLine(), out a));
-            return Convert.ToDouble(a);
+            return a;
         }
 
         static void Main(string[] args)
@@ -33,13 +33,13 @@ namespace ProjectLaba
                 }
                 else if (discriminant == 0)
                 {
-                    double x = (-b + Math.Round(Math.Sqrt(discriminant), 2)) / 2 * a;
+                    double x = (-b + Math.Round(Math.Sqrt(discriminant), 2)) / (2 * a);
                     Console.Write("X = " + x);
                 }
                 else if (discriminant > 0)
                 {
-                    double x1 = (-b + Math.Round(Math.Sqrt(discriminant), 2)) / 2 * a;
-                    double x2 = (-b - Math.Round(Math.Sqrt(discriminant), 2)) / 2 * a;
+                    double x1 = (-b + Math.Round(Math.Sqrt(discriminant), 2)) / (2 * a);
+                    double x2 = (-b - Math.Round(Math.Sqrt(discriminant), 2)) / (2 * a);
                     Console.Write("X1 = " + x1 + " X2 = " + x2);
                 }
 
