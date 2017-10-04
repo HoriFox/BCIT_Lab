@@ -10,3 +10,6 @@ C:\Users\HeliSRaiN\Desktop\BCIT_Lab\Lab_1\ProjectLaba\obj\Debug\ProjectLaba.pdb
 C:\Users\HeliSRaiN\Desktop\BCIT_Lab\Lab_1\ProjectLaba\bin\Debug\ProjectLaba.exe
 C:\Users\HeliSRaiN\Desktop\BCIT_Lab\Lab_1\ProjectLaba\bin\Debug\ProjectLaba.pdb
 C:\Users\HeliSRaiN\Desktop\BCIT_Lab\Lab_1\ProjectLaba\obj\Debug\ProjectLaba.csprojResolveAssemblyReference.cache
+C:\Users\HeliSRaiN\Desktop\Интернет компоненты\BCIT_Lab\Lab_1\ProjectLaba\bin\Debug\ProjectLaba.exe.config
+C:\Users\HeliSRaiN\Desktop\Интернет компоненты\BCIT_Lab\Lab_1\ProjectLaba\obj\Debug\ProjectLaba.exe
+C:\Users\HeliSRaiN\Desktop\Интернет компоненты\BCIT_Lab\Lab_1\ProjectLaba\obj\Debug\ProjectLaba.pdb
