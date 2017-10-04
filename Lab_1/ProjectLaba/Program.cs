@@ -1,4 +1,3 @@
-﻿using System;
 using System; // О - Оптимизация :)
 
 namespace ProjectLaba
