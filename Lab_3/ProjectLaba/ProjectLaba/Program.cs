@@ -4,38 +4,29 @@ using System.Collections.Generic;
 
 namespace ProjectLaba
 {
-    public interface IComparable
+    public abstract class GeometricFigure : IComparable
     {
-        int CompareTo(object figure);
-    }
-    public class GeometricFigure : IComparable<GeometricFigure>
-    {
-        public double area;         // Площадь фигуры
-        public ArrayList collection;
-        public GeometricFigure()
+        public abstract double area();         // Площадь фигуры
+        public int CompareTo(object figure)
         {
-            collection = new ArrayList();
-        }
-        public void AddInCollection(GeometricFigure figure)
-        {
-            collection.Add(figure);
-        }
-        public int CompareTo(GeometricFigure figure)
-        {
-            GeometricFigure figure2 = figure;
-            if (this.area < figure2.area)
-                return 1;
-            else if (this.area > figure2.area)
+            GeometricFigure figure2 = (GeometricFigure)figure;
+            if (this.area() < figure2.area())
                 return -1;
+            else if (this.area() > figure2.area())
+                return 1;
             else return 0;
         }
     }
 
     public class Rectangle : GeometricFigure // Прямоугольник
     {
-        public Rectangle (double width, double height)
+        double width;
+        double height;
+        public override double area() { return width * height; }
+        public Rectangle (double _width, double _height)
         {
-            area = width * height;
+            width = _width;
+            height = _height;
         }
     }
     public class Square : Rectangle         // Квадрат
@@ -44,9 +35,11 @@ namespace ProjectLaba
     }
     public class Circle : GeometricFigure   // Круг
     {
-        public Circle(double radius)
+        double radius;
+        public override double area() { return Math.PI * radius * radius; }
+        public Circle(double _radius)
         {
-            area = Math.PI * radius * radius;
+            radius = _radius;
         }
     }
 
@@ -69,34 +62,29 @@ namespace ProjectLaba
             bool work;
             do
             {
-            // Меню
-                GeometricFigure figure = new GeometricFigure();
+                // Меню
 
-                //figure.AddInCollection(new Rectangle(20, 40));
-                //figure.AddInCollection(new Rectangle(20, 20));
-                //figure.AddInCollection(new Rectangle(70, 70));
-                //figure.AddInCollection(new Rectangle(10, 10));
-
-                Rectangle rt1 = new Rectangle(20, 40);
-                Rectangle rt2 = new Rectangle(40, 90);
-                Rectangle rt3 = new Rectangle(10, 10);
-                figure.AddInCollection(rt1);
-                figure.AddInCollection(rt2);
-                figure.AddInCollection(rt3);
-
-                //int state = rt1.CompareTo(rt2);
-
-                figure.collection.Sort();
-
-                foreach (GeometricFigure p in figure.collection)
+                Console.Write("ArrayList: \n");
+                ArrayList collection = new ArrayList();
+                collection.Add(new Rectangle(20, 40));
+                collection.Add(new Rectangle(30, 40));
+                collection.Add(new Rectangle(80, 40));
+                collection.Sort();
+                foreach (GeometricFigure p in collection)
                 {
-                    Console.WriteLine("{0} - {1}", p.area);
+                    Console.Write(p.area()+"\n");
                 }
 
-                //Console.WriteLine(state);
-
-                //List<GeometricFigure> collection2 = new List<GeometricFigure>();
-                //collection2.Add(new Rectangle(20, 40));
+                Console.Write("\nList<GeometricFigure>: \n");
+                List<GeometricFigure> collection2 = new List<GeometricFigure>();
+                collection2.Add(new Rectangle(40, 40));
+                collection2.Add(new Rectangle(80, 40));
+                collection2.Add(new Rectangle(40, 45));
+                collection2.Sort();
+                foreach (GeometricFigure p in collection2)
+                {
+                    Console.Write(p.area() + "\n");
+                }
 
 
                 Console.Write("\nContinue? (y/n) \n");
