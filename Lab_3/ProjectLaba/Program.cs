@@ -62,9 +62,22 @@ namespace ProjectLaba
             bool work;
             do
             {
-                // Меню
+                //Console.Clear();
+                //Console.Write("Выберите фигуру:\n1 | Прямоугольник\n2 | Квадрат\n3 | Круг\n");
+                //select = inputInt();
 
-                Console.Write("ArrayList: \n");
+                //switch (select)
+                //{
+                //    case 1:
+                //        Console.Clear();
+                //        param1 = inputVal("Enter width: ");
+                //        param2 = inputVal("Enter height: ");
+                //        Rectangle rectangle = new Rectangle(param1, param2);
+                //        rectangle.Print();
+
+                        // Меню
+
+                        Console.Write("ArrayList: \n");
                 ArrayList collection = new ArrayList();
                 collection.Add(new Rectangle(20, 40));
                 collection.Add(new Rectangle(30, 40));
