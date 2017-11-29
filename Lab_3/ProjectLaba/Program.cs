@@ -41,6 +41,29 @@ namespace ProjectLaba
             radius = _radius;
         }
     }
+    public class Matrix
+    {
+        public Matrix(int _x, int _y, int _z, int _n)
+        {
+            Random rnd = new Random();
+            int x_rnd = rnd.Next(0, _x);
+            int y_rnd = rnd.Next(0, _y);
+            int z_rnd = rnd.Next(0, _z);
+
+            for (int x = 0; x < _x; x++)
+            {
+                for (int y = 0; y < _y; y++)
+                {
+                    List<GeometricFigure> matrix_Z = new List<GeometricFigure>();
+                    for (int z = 0; z < _z; z++)
+                    {
+
+                        matrix_Z.Add(new Square(rnd.Next(0, 20)));
+                    }
+                }   
+            }      
+        }
+    }
     //public class SimpleStack : SimpleList
     //{
 
@@ -91,13 +114,25 @@ namespace ProjectLaba
                         collection2.Add(new Rectangle(80, 40));
                         collection2.Add(new Rectangle(40, 45));
                         collection2.Sort();
+
+                        //Console.Write("\n" + collection2[1].area() + "\n\n");
+
                         foreach (GeometricFigure p in collection2)
                         {
                             Console.Write(p.area() + "\n");
                         }
                     break;
                     case 2:
-
+                        Console.Clear();
+                        Console.Write("Введите X, Y, Z матрицы последовательно через ENTER:\n");
+                        int x, y, z;
+                        x = inputInt();
+                        y = inputInt();
+                        z = inputInt();
+                        Console.Write("Введите количество элементов:\n");
+                        int n;
+                        n = inputInt();
+                        Matrix matrix = new Matrix(x, y, z, n);
                     break;
                     case 3:
 
