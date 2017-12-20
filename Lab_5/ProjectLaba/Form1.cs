@@ -24,7 +24,7 @@ namespace Lab_5
             cl.Reset();
             OpenFileDialog win1 = new OpenFileDialog();
             win1.InitialDirectory = "\\Mac/Home/Documents/Course_2\bkIT/Lab_4";
-            win1.Filter = "txt files (*.txt)|*.txt";//|All files (*.*)|*.*";
+            win1.Filter = "txt files (*.txt)|*.txt";
             win1.FilterIndex = 2;
             win1.RestoreDirectory = true;
             if (win1.ShowDialog() == DialogResult.OK)
@@ -41,13 +41,13 @@ namespace Lab_5
                             a.Add(l);
                     }
                     a.Sort();
-                    cl.Stop();
-                    label1.Text = "Opening file, reading and sorting array(ms): " + cl.ElapsedMilliseconds.ToString();
                     addToListBox(a);
+                    cl.Stop();
+                    label1.Text = "Чтение файла, сортировка и вывод слов: " + cl.ElapsedMilliseconds.ToString() + " миллисекунд";
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("ERROR! Couldn't read file from disk!\n Original error: " + ex.Message);
+                    MessageBox.Show("Ошибка чтения файла!\n" + ex.Message);
                 }
             }
         }
@@ -67,7 +67,7 @@ namespace Lab_5
             cl.Start();
             listBox1.SelectedIndex = listBox1.FindStringExact(textBox1.Text);
             cl.Stop();
-            label2.Text = "Searching in ListBox(ms): " + cl.ElapsedMilliseconds.ToString();
+            label2.Text = "Поиск в списке: " + cl.ElapsedMilliseconds.ToString() + " миллисекунд";
             LevFormlist(textBox1.Text);
         }
         public static int LevDist(string string1, string string2)
@@ -100,7 +100,7 @@ namespace Lab_5
             bool f = int.TryParse(textBox2.Text, out p);
             if (!f || p < 0)
             {
-                throw new ArgumentException("Invalid Levenshtain parametr!");
+                throw new ArgumentException("Неправильные значения!");
             }
             listBox2.BeginUpdate();
             listBox2.Items.Clear();
@@ -112,7 +112,7 @@ namespace Lab_5
             }
             cl.Stop();
             listBox2.EndUpdate();
-            label5.Text = " Making Levenshtein Distanse list(ms): " + cl.ElapsedMilliseconds;
+            label5.Text = " Создание списка с Расстоянием Левенштейна: " + cl.ElapsedMilliseconds + " миллисекунд";
         }
     }
 }

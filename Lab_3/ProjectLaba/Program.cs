@@ -13,30 +13,17 @@ namespace Laba4
     }
     public interface IMatrixCheckEmpty<T>
     {
-        // Возвращает пустой элемент
-        T getEmptyElement();
-
-        //Проверка что элемент является пустым
-        bool checkEmptyElement(T element);
+        T getEmptyElement(); // Кидаем пустой элемент
+        bool checkEmpty(T element); // Проверка на пустой элемент
     }
-    //Фигура
     abstract class Figure : IComparable
     {
-        //Тип фигуры
         public string Type { get; protected set; }
-
-        //Абстрактный метод вычисления площади фигуры
         public abstract double Area();
-
-        //Метод вывода площади фигуры
         public override string ToString()
         {
-            return "Площадь фигуры: " + this.Area().ToString();
+            return "Площадь = " + this.Area().ToString();
         }
-        // Сравнение для сортировки
-        // -1 - правый элемент больше левого
-        // 0 - один элемент равен другому
-        // 1 - правый элемент меньше левого
         public int CompareTo(Object obj)
         {
             Figure p = (Figure)obj;
@@ -46,44 +33,34 @@ namespace Laba4
                 return 0;
             else
                 return 1;
-            //(this.Area() > p.Area())
         }
     }
-    //Прямоугольник
     class Rectangle : Figure, IPrint
     {
-        //Конструктор
         public Rectangle(double w, double h)
         {
-            this.Type = "Прямоугольник";
             this.width = w;
             this.length = h;
         }
-        //Длина
         private double _length = 0;
         public double length
         {
-            //возвращаемое значение 
             get
             {
                 return _length;
             }
-            //установка значения, value - ключевое слово 
             set
             {
                 _length = value;
             }
         }
-        //Ширина
         private double _width = 0;
         public double width
         {
-            //возвращаемое значение 
             get
             {
                 return _width;
             }
-            //установка значения, value - ключевое слово 
             set
             {
                 _width = value;
@@ -91,9 +68,7 @@ namespace Laba4
         }
         public override string ToString()
         {
-            return this.Type + " со сторонами равными " + this.width + " и "
-                + this.length + " и площадью равной " + this.Area();
-
+            return "Прямоугольник [" + this.width + ", " + this.length + "] S = " + this.Area();
         }
         public override double Area()
         {
@@ -105,32 +80,27 @@ namespace Laba4
             Console.WriteLine(ToString());
         }
     }
-    //Квадрат
     class Square : Rectangle, IPrint
     {
         public double size { get; set; }
         public Square(double s) : base(s, s)
         {
-            this.Type = "Квадрат";
             this.size = s;
         }
         public override string ToString()
-        {
-            return this.Type + " со стороной " + this.size + " и площадью " + this.Area();
+        {    
+            return "Квадрат [" + this.width + ", " + this.length + "] S = " + this.Area();
         }
     }
-    //Круг
     class Circle : Figure, IPrint
     {
         private double _radius = 0;
         public double radius
         {
-            //возвращаемое значение 
             get
             {
                 return _radius;
             }
-            //установка значения, value - ключевое слово 
             set
             {
                 _radius = value;
@@ -139,7 +109,6 @@ namespace Laba4
         public Circle(double r)
         {
             this.radius = r;
-            this.Type = "Круг";
         }
         public override double Area()
         {
@@ -152,12 +121,11 @@ namespace Laba4
         }
         public override string ToString()
         {
-            return this.Type + " с радиусом " + this.radius + " и площадью " + this.Area();
+            return "Круг [" + this.radius + "] S = " + this.Area();
         }
     }
 
-    //Класс для разреженной проверки пустоты и ее задания
-    //наслудется от интерфейся с аналогичной задачей (для Figure)
+    //Класс для разреженной проверки пустоты
     class FigureMatrixCheckEmpty : IMatrixCheckEmpty<Figure>
     {
         // В качестве пустого элемента возвращается null
@@ -166,7 +134,7 @@ namespace Laba4
             return null;
         }
         // Проверка на равенство null
-        public bool checkEmptyElement(Figure element)
+        public bool checkEmpty(Figure element)
         {
             bool Result = false;
             if (element == null)
@@ -177,7 +145,7 @@ namespace Laba4
         }
     }
 
-    //Класс матрицы
+    //Класс матрицы (методичка)
     public class Matrix<T>
     {
         // Словарь для хранения значений
@@ -209,7 +177,7 @@ namespace Laba4
                 CheckBounds(x, y);
 
                 //Передача ключу значения координат элемента в матрице
-                string key = DictKey(x, y);
+                string key = x.ToString() + "_" + y.ToString();
 
                 //Передача элемента в матрицу
                 this._matrix.Add(key, value);
@@ -217,9 +185,7 @@ namespace Laba4
             get
             {
                 CheckBounds(x, y);
-                string key = DictKey(x, y);
-                //Проверка принадлежности элемента матрице стандартным методом (из методички)
-                //Вопрос: какие ЕЩЁ такие стандартные методы есть у реализуемых нами объектов?
+                string key = x.ToString() + "_" + y.ToString();
                 if (this._matrix.ContainsKey(key))
                 {
                     return this._matrix[key];
@@ -247,13 +213,6 @@ namespace Laba4
             }
         }
 
-        // Формирование ключа
-        string DictKey(int x, int y)
-        {
-            return x.ToString() + "_" + y.ToString();
-        }
-
-        // Приведение к строке для печати
         public override string ToString()
         {
             StringBuilder b = new StringBuilder();
@@ -268,7 +227,7 @@ namespace Laba4
                         b.Append("\t");
                     }
                     //Если текущий элемент не пустой
-                    if (!this.сheckEmpty.checkEmptyElement(this[i, j]))
+                    if (!this.сheckEmpty.checkEmpty(this[i, j]))
                     {
                         //Добавить приведенный к строке текущий элемент
                         b.Append(this[i, j].ToString());
@@ -276,7 +235,7 @@ namespace Laba4
                     else
                     {
                         //Иначе добавить признак пустого значения
-                        b.Append(" - ");
+                        b.Append(" -------NULL------- ");
                     }
                 }
                 b.Append("]\n");
@@ -285,27 +244,22 @@ namespace Laba4
         }
     }
 
-    //Класс элемента списка для создания класса стэка
+    //Простой односвязный список (методичка)
+    //Элемент списка
     public class SimpleListItem<T>
     {
-        //Данные
         public T data { set; get; }
-        //Следующий элемент
         public SimpleListItem<T> next { set; get; }
-        //Конструктор
         public SimpleListItem(T param)
         {
             this.data = param;
         }
     }
-    // Список
+    //Список
     public class SimpleList<T> : IEnumerable<T> where T : IComparable
     {
-        // Первый элемент списка
         protected SimpleListItem<T> first = null;
-        // Последний элемент списка
         protected SimpleListItem<T> last = null;
-        // Количество элементов
         public int Count
         {
             get
@@ -318,22 +272,17 @@ namespace Laba4
             }
         }
         int _count;
-        // Добавление элемента
         public void Add(T element)
         {
             SimpleListItem<T> newItem = new SimpleListItem<T>(element);
             this.Count++;
-            //Добавление первого элемента
             if (last == null)
             {
                 this.first = newItem; this.last = newItem;
             }
-            //Добавление следующих элементов
             else
             {
-                //Присоединение элемента к цепочке
                 this.last.next = newItem;
-                //Присоединенный элемент считается последним
                 this.last = newItem;
             }
         }
@@ -418,40 +367,28 @@ namespace Laba4
             cj.data = temp;
         }
     }
-    // Класс стек
+    //Класс стек
     class SimpleStack<T> : SimpleList<T> where T : IComparable
     {
-        // Добавление в стек
-        public void Push(T element)
+        public void Push(T element) //Добавление в стек
         {
             Add(element);
         }
-        // Удаление и чтение из стека
-        public T Pop()
+        public T Pop() //Удаление и чтение из стека
         {
-            //значение для типа T по умолчанию
             T Result = default(T);
-            //Если стек пуст, возвращается значение по умолчанию для типа
             if (this.Count == 0) return Result;
-            //Если элемент единственный
             if (this.Count == 1)
             {
-                //то из него читаются данные
                 Result = this.first.data;
-                //обнуляются указатели начала и конца списка
                 this.first = null;
                 this.last = null;
             }
-            //В списке более одного элемента
             else
             {
-                //Поиск предпоследнего элемента
                 SimpleListItem<T> newLast = this.GetItem(this.Count - 2);
-                //Чтение значения из последнего элемента
                 Result = newLast.next.data;
-                //предпоследний элемент считается последним
                 this.last = newLast;
-                //последний элемент удаляется из списка
                 newLast.next = null;
             }
             this.Count--;
@@ -459,142 +396,107 @@ namespace Laba4
         }
     }
 
-    //Основная программа
     class Program
     {
-        //Функция меню
-        static int Menu()
-        {
-            Console.Write("!!!Перед вами программа для работы с площадями геометрических фигур!!!\n");
-            Console.Write("Выберите интересующую вас фигуру\n");
-            Console.Write("================\n");
-            Console.Write("1. Прямоугольник\n");
-            Console.Write("2. Квадрат\n");
-            Console.Write("3. Круг\n");
-            Console.Write("4. Выход\n");
-            Console.Write("================\n\n");
-
-            int c;
-            c = Vvod_int();
-            return c;
-        }
-
-        //Функция ввода целого числа без ошибок
-        static int Vvod_int()
-        {
-            bool result;
-            int c;
-            do
-            {
-                result = int.TryParse(Console.ReadLine(), out c);
-                if (result)
-                {
-                    break;
-                }
-                else
-                {
-                    Console.Write("Вы ввели не число! Пожалуйста, повторите ввод: ");
-                }
-            } while (true);
-            return c;
-        }
-
-        //Главная функция
         static void Main(string[] args)
         {
-            //Создание элементов фигур
-            //b = Vvod_int(); ввод числа до верного ввода
-
-            Console.WriteLine("\nArrayList\n");
-
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("# ArrayList ~~~~~~~~~~~~~~~~~~");
+            Console.WriteLine("# Создаём объекты..."); Console.ResetColor();
             Rectangle rec1 = new Rectangle(3, 4);
             Square sq1 = new Square(5);
             Circle c1 = new Circle(2);
+            Rectangle rec2 = new Rectangle(5, 4);
 
-            //Коллекция класса ArrayList
+            Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine("# Кладём объекты в ArrayList..."); Console.ResetColor();
             ArrayList fig1 = new ArrayList();
             fig1.Add(rec1);
             fig1.Add(sq1);
             fig1.Add(c1);
-            //Печать до сортировки
-            Console.WriteLine("\nПеред сортировкой:");
+            fig1.Add(rec2);
+
             foreach (object o in fig1)
             {
                 Console.WriteLine(o.ToString());
             }
+
+            Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine("\n# Сортировка ArrayList..."); Console.ResetColor();
             fig1.Sort();
-            //после сортировки
-            Console.WriteLine("\nПосле сортировки:");
             foreach (object o in fig1)
             {
                 Console.WriteLine(o.ToString());
             }
 
-            Console.WriteLine("\nList\n");
-
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\n# List ~~~~~~~~~~~~~~~~~~~~~~~");
+            Console.WriteLine("# Создаём объекты..."); Console.ResetColor();
             Rectangle rect = new Rectangle(5, 8);
             Square square = new Square(4);
             Circle circle = new Circle(6);
+            Rectangle rec3 = new Rectangle(7, 4);
 
+            Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine("# Кладём объекты в List..."); Console.ResetColor();
             List<Figure> fig2 = new List<Figure>()
             {
-                circle, square, rect
+                circle, square, rect, rec3
             };
-            //Печать до сортировки
-            Console.WriteLine("\nПеред сортировкой:");
+
             foreach (object o in fig1)
             {
                 Console.WriteLine(o.ToString());
             }
+
+            Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine("\n# Сортировка List..."); Console.ResetColor();
             fig2.Sort();
-            //после сортировки
-            Console.WriteLine("\nПосле сортировки:");
             foreach (object o in fig2)
             {
                 Console.WriteLine(o.ToString());
             }
 
-            //Матрица
-            Console.WriteLine("\nМатрица");
-            Matrix<Figure> matrix =
-                new Matrix<Figure>(3, 3, new FigureMatrixCheckEmpty());
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\n# Матрица ~~~~~~~~~~~~~~~~~~~~");
+            Console.WriteLine("# Создаём матрицу...");
+            Console.WriteLine("# Кладём объекты в матрицу..."); Console.ResetColor();
+            Matrix<Figure> matrix = new Matrix<Figure>(3, 4, new FigureMatrixCheckEmpty());
             matrix[0, 0] = rect;
             matrix[1, 1] = square;
             matrix[2, 2] = circle;
+            matrix[0, 3] = rec3;
             Console.WriteLine(matrix.ToString());
 
-            //Нестандартный список
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\n# Проверка стека ~~~~~~~~~~~~~");
+            Console.WriteLine("# Создаём объекты...");
+            Console.WriteLine("# Кладём объекты в List..."); Console.ResetColor();
             SimpleList<Figure> list = new SimpleList<Figure>();
             list.Add(circle);
             list.Add(rect);
             list.Add(square);
-            Console.WriteLine("\nПеред сортировкой:");
-            foreach (var x in list)
-            {
-                Console.WriteLine(x);
-            }
-            //сортировка
-            list.Sort();
-            Console.WriteLine("\nПосле сортировки:");
             foreach (var x in list)
             {
                 Console.WriteLine(x);
             }
 
-            //Стэк из фигур
-            Console.WriteLine("\nСтэк из фигур " +
-                "(видно, что печать и удаление соответственно идут начиная с последнего элемента)\n");
+            Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine("\n# Сортировка List..."); Console.ResetColor();
+            list.Sort();
+            foreach (var x in list)
+            {
+                Console.WriteLine(x);
+            }
+
+            Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine("\n# Стэк с фигурами");
+            Console.WriteLine("# Кладём объекты в стек (Push)..."); Console.ResetColor();
             SimpleStack<Figure> stack = new SimpleStack<Figure>();
             stack.Push(rect);
             stack.Push(square);
             stack.Push(circle);
+            Console.ForegroundColor = ConsoleColor.Green; Console.WriteLine("# Вывод объектов из стека (Pop)..."); Console.ResetColor();
             while (stack.Count > 0)
             {
                 Figure f = stack.Pop();
                 Console.WriteLine(f);
             }
 
-            Console.WriteLine("\nРабота программы завершена :)\n");
             Console.Read();
         }
     }
